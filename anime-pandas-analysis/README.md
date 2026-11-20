@@ -16,7 +16,7 @@ The main objectives of this project are to:
 - Investigate data types and identify incorrectly stored numerical variables.
 - Apply column-specific cleaning decisions instead of blindly replacing values.
 - Convert suitable variables to appropriate Pandas data types.
-- Extract useful numerical features from text-based columns.
+- Inspect text-based columns and identify potential numerical features.
 - Validate the cleaned dataset after transformation.
 - Build a reliable dataset suitable for further analysis and real-world data science work.
 
@@ -89,7 +89,7 @@ Unknown
 
 Because the numerical information is embedded in text, the column cannot be used directly for numerical analysis.
 
-A new `Duration_minutes` feature was therefore created by extracting hours, minutes, and seconds and converting them into total minutes.
+The notebook inspects duration strings and describes converting hours, minutes, and seconds into a common unit as a future step. The current executable notebook does not create a `Duration_minutes` feature.
 
 For example:
 
@@ -194,22 +194,9 @@ This distinction is important because data cleaning should be based on **column 
 
 ---
 
-### Step 5 — Engineer Duration
+### Step 5 — Inspect duration
 
-The original `Duration` column was preserved and a numerical feature was created:
-
-```text
-Duration_minutes
-```
-
-The transformation accounts for:
-
-- hours
-- minutes
-- seconds
-- missing duration values
-
-Regular expressions were used to identify the different time components before converting them into a common unit.
+The notebook inspects the text values in `Duration` and identifies hours, minutes, and seconds. Converting those values to a numeric feature is planned but is not implemented in the current executable cells. The original column remains unchanged.
 
 ---
 
@@ -255,7 +242,7 @@ Instead, the project evaluates variables individually.
 
 ### Decision: Keep the original `Duration`
 
-The original text representation contains useful information and provides traceability for the engineered `Duration_minutes` feature.
+The original text representation contains useful information. The notebook retains it and has not yet implemented the proposed numeric duration feature.
 
 ### Decision: Use nullable integer types
 
@@ -272,7 +259,6 @@ The cleaning stage is designed to produce a trustworthy dataset first. Analytica
 - **Python**
 - **Pandas**
 - **NumPy**
-- **Regular Expressions (`re`)**
 - **Jupyter Notebook / VS Code**
 - **Git & GitHub**
 
@@ -280,23 +266,17 @@ The cleaning stage is designed to produce a trustworthy dataset first. Analytica
 
 ## Project Structure
 
-A suggested repository structure is:
+The repository structure is:
 
 ```text
 anime-pandas-analysis/
-│
 ├── Data/
 │   └── anime.csv
-│
-├── notebooks/
-│   └── anime_data_analysis.ipynb
-│
+├── notebook/
+│   └── anime-analysis.ipynb
 ├── README.md
-│
-└── ...
+└── requirements.txt
 ```
-
-The exact folder structure may vary depending on the organization of the wider GitHub repository.
 
 ---
 
@@ -319,7 +299,7 @@ Additional checks include verifying:
 - numerical ranges
 - data types
 - missing-value percentages
-- duration conversion results
+- planned duration conversion behavior
 - unexpected or invalid values
 - consistency between related variables
 
@@ -356,8 +336,6 @@ This project demonstrates practical skills relevant to entry-level data science 
 - Missing-data detection
 - Data cleaning
 - Type conversion
-- Feature engineering
-- Regular expressions
 - Pandas indexing and filtering
 - Categorical-data reasoning
 - Nullable data types
@@ -381,7 +359,7 @@ The emphasis is on **understanding why a transformation is appropriate**, not si
 - [x] Investigate affected columns
 - [x] Clean numerical `"Unknown"` values
 - [x] Convert appropriate numerical columns
-- [x] Engineer `Duration_minutes`
+- [ ] Engineer a numeric duration feature
 - [ ] Complete final validation
 - [ ] Perform exploratory analysis
 - [ ] Answer real-world analytical questions
@@ -409,3 +387,17 @@ Rather than treating Pandas as a collection of commands, the project uses Pandas
 **Data Science Portfolio Project**
 
 Built as part of a practical Python and Pandas data-science learning portfolio.
+
+## Installation and Running
+
+From the project directory:
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+Set-Location notebook
+jupyter notebook anime-analysis.ipynb
+```
+
+Run the notebook with `notebook/` as its working directory so `../Data/anime.csv` resolves. The cleaned data and validation results remain in notebook variables; no cleaned dataset is exported.

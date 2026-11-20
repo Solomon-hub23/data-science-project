@@ -34,6 +34,8 @@ Number of observations:
 Number of features:
 12
 
+The notebook currently loads and analyzes the red-wine file (`Data/winequality-red.csv`). The white-wine dataset is also included in `Data/`, but the notebook does not currently load it.
+
 
 ## Technologies Used
 
@@ -107,6 +109,35 @@ Future versions of this project may include:
 - Data visualization
 - Statistical hypothesis testing
 - Machine Learning models for quality prediction
+
+## Project Structure
+
+```text
+wine-quality-numpy-analysis/
+├── Data/
+│   ├── winequality-red.csv
+│   ├── winequality-white.csv
+│   └── winequality.names
+├── notebooks/
+│   └── Numpy.ipynb
+├── README.md
+├── requirements.txt
+└── LICENSE
+```
+
+## Installation and Running
+
+From the project directory:
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+Set-Location notebooks
+jupyter notebook Numpy.ipynb
+```
+
+Run the notebook with `notebooks/` as its working directory. It reads the red-wine CSV using a semicolon delimiter and skips the header row.
 
 
 
